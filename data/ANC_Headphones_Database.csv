@@ -1,0 +1,101 @@
+Model,Brand,Price_GBP,ANC_dB,Sound_Quality,Bass_Intensity,Durability,Earcup_Fit,Tier
+Sony WH-1000XM6,Sony,349,38,9.2,Bass-Heavy,8.5,Snug,Flagship
+Bose QuietComfort Ultra,Bose,429,39,8.9,Balanced,8.0,Spacious,Flagship
+Apple AirPods Max 2,Apple,499,40,9.0,Balanced,9.5,Spacious,Flagship
+Sennheiser Momentum 5,Sennheiser,329,35,9.4,Balanced,8.5,Spacious,Flagship
+Bowers & Wilkins PX8,Bowers & Wilkins,599,33,9.6,Balanced,9.5,Snug,Audiophile
+Focal Bathys MG,Focal,699,32,9.8,Neutral,9.5,Deep,Audiophile
+Bang & Olufsen Beoplay H100,Bang & Olufsen,1299,34,9.7,Balanced,9.8,Spacious,Audiophile
+Dali IO-12,Dali,899,31,9.9,Neutral,9.5,Spacious,Audiophile
+Mark Levinson No. 5909,Mark Levinson,999,30,9.8,Balanced,9.0,Snug,Audiophile
+T+A Solitaire T,T+A,1200,28,10.0,Neutral,9.5,Spacious,Audiophile
+Sony WH-1000XM5,Sony,279,36,8.8,Bass-Heavy,8.0,Snug,Flagship
+Bose QuietComfort 45,Bose,249,37,8.5,Balanced,8.0,Spacious,Flagship
+Apple AirPods Max,Apple,449,38,8.6,Balanced,9.5,Spacious,Flagship
+Sennheiser Momentum 4,Sennheiser,249,33,9.1,Bass-Heavy,8.0,Spacious,Flagship
+Sony WH-1000XM4,Sony,229,35,8.7,Bass-Heavy,8.5,Snug,Flagship
+Bose Noise Cancelling 700,Bose,299,35,8.4,Balanced,8.5,Shallow,Flagship
+Bowers & Wilkins PX7 S3,Bowers & Wilkins,379,32,9.2,Balanced,9.0,Snug,Flagship
+Master & Dynamic MW75,Master & Dynamic,549,31,9.0,Balanced,9.5,Spacious,Audiophile
+Technics EAH-A800,Technics,299,33,8.9,Balanced,8.5,Deep,Flagship
+Shure AONIC 50 Gen 2,Shure,329,30,9.1,Neutral,9.0,Spacious,Audiophile
+Sony ULT Wear,Sony,179,34,8.2,Bass-Heavy,7.5,Snug,Mid-Range
+Sennheiser Accentum Plus,Sennheiser,199,31,8.5,Balanced,7.5,Snug,Mid-Range
+Beats Studio Pro,Beats,249,34,8.3,Bass-Heavy,8.0,Snug,Mid-Range
+JBL Tour One M2,JBL,229,33,8.4,Bass-Heavy,8.0,Spacious,Mid-Range
+Marshall Monitor III ANC,Marshall,299,32,8.6,Balanced,9.0,Snug,Mid-Range
+Cleer Enduro ANC,Cleer,129,28,7.8,Bass-Heavy,7.5,Shallow,Mid-Range
+1More Sonoflow,1More,89,30,8.0,Balanced,7.0,Spacious,Budget
+Anker Soundcore Space One,Anker,89,32,7.9,Bass-Heavy,7.0,Spacious,Budget
+EarFun Wave Pro,EarFun,79,31,8.1,Balanced,7.0,Snug,Budget
+Edifier WH950NB,Edifier,149,32,8.2,Balanced,7.5,Spacious,Mid-Range
+Bowers & Wilkins PX7 S2e,Bowers & Wilkins,299,31,9.1,Balanced,9.0,Snug,Flagship
+Focal Bathys,Focal,699,31,9.5,Neutral,9.5,Deep,Audiophile
+Bang & Olufsen Beoplay HX,Bang & Olufsen,449,30,8.9,Balanced,9.5,Spacious,Flagship
+Bang & Olufsen Beoplay Portal,Bang & Olufsen,449,29,8.7,Balanced,9.0,Spacious,Flagship
+Master & Dynamic MW65,Master & Dynamic,399,28,8.5,Balanced,9.5,Snug,Flagship
+Yamaha YH-E700B,Yamaha,299,30,8.8,Neutral,8.5,Spacious,Mid-Range
+Denon AH-GC30,Denon,249,29,8.6,Balanced,8.5,Snug,Mid-Range
+Philips Fidelio L3,Philips,229,32,8.7,Balanced,8.5,Spacious,Mid-Range
+Jabra Elite 85h,Jabra,199,31,8.3,Balanced,8.5,Spacious,Mid-Range
+Audio-Technica ATH-ANC900BT,Audio-Technica,249,30,8.5,Neutral,8.0,Snug,Mid-Range
+Anker Soundcore Space Q45,Anker,129,33,7.8,Bass-Heavy,7.5,Spacious,Mid-Range
+Anker Soundcore Life Q35,Anker,109,30,7.7,Bass-Heavy,7.5,Spacious,Budget
+Anker Soundcore Life Q30,Anker,69,28,7.5,Bass-Heavy,7.0,Spacious,Budget
+Sony WH-CH720N,Sony,99,29,7.9,Balanced,7.5,Shallow,Budget
+Sennheiser Accentum,Sennheiser,149,30,8.3,Balanced,7.5,Snug,Mid-Range
+Sennheiser HD 450BT,Sennheiser,119,27,7.8,Neutral,7.5,Tight,Budget
+JBL Live 770NC,JBL,159,31,8.0,Bass-Heavy,7.5,Snug,Mid-Range
+JBL Tune 770NC,JBL,99,29,7.7,Bass-Heavy,7.0,Snug,Budget
+JBL Tune 760NC,JBL,79,27,7.5,Bass-Heavy,7.0,Snug,Budget
+Skullcandy Crusher ANC 2,Skullcandy,199,30,7.4,Bass-Heavy,7.5,Spacious,Mid-Range
+Skullcandy Hesh ANC,Skullcandy,99,26,7.2,Bass-Heavy,7.0,Snug,Budget
+Beats Solo Pro,Beats,149,31,7.9,Bass-Heavy,8.0,Tight,Mid-Range
+Razer Opus,Razer,199,30,8.1,Balanced,8.0,Spacious,Mid-Range
+Razer Opus X,Razer,89,28,7.6,Bass-Heavy,7.0,Spacious,Budget
+Microsoft Surface Headphones 2,Microsoft,229,31,8.0,Balanced,8.5,Spacious,Mid-Range
+Bose QuietComfort SE,Bose,219,36,8.4,Balanced,8.0,Spacious,Mid-Range
+Sennheiser PXC 550-II,Sennheiser,179,30,8.6,Neutral,8.0,Spacious,Mid-Range
+JLab Studio Pro ANC,JLab,89,25,7.1,Bass-Heavy,7.0,Snug,Budget
+Panasonic RB-M700B,Panasonic,129,26,7.3,Bass-Heavy,7.5,Spacious,Budget
+Treblab Z2,Treblab,79,25,7.0,Bass-Heavy,7.0,Snug,Budget
+Jabra Evolve2 85,Jabra,349,32,8.2,Balanced,8.5,Spacious,Flagship
+Poly Voyager Surround 80 UC,Poly,399,33,8.3,Balanced,8.5,Spacious,Flagship
+EPOS Adapt 660,EPOS,299,31,8.4,Neutral,8.5,Snug,Mid-Range
+Logitech Zone Wireless,Logitech,199,28,7.5,Balanced,8.0,Snug,Mid-Range
+Plantronics BackBeat Go 810,Plantronics,99,26,7.6,Balanced,7.5,Snug,Budget
+JBL Club One,JBL,249,31,8.5,Bass-Heavy,8.5,Snug,Mid-Range
+JBL Everest Elite 750NC,JBL,199,27,7.8,Bass-Heavy,7.5,Snug,Mid-Range
+Harman Kardon Fly ANC,Harman Kardon,199,28,8.2,Balanced,8.0,Snug,Mid-Range
+AKG N700NC M2,AKG,199,30,8.7,Neutral,8.0,Spacious,Mid-Range
+AKG Y600NC,AKG,149,29,8.4,Balanced,8.0,Spacious,Mid-Range
+Montblanc MB 01,Montblanc,499,29,8.5,Balanced,9.5,Snug,Audiophile
+Porsche Design PD One,Porsche,399,28,8.4,Balanced,9.0,Snug,Flagship
+KEF Mu7,KEF,349,29,8.9,Neutral,9.0,Spacious,Audiophile
+Dali IO-6,Dali,399,28,9.0,Neutral,9.0,Spacious,Audiophile
+Beyerdynamic Lagoon ANC,Beyerdynamic,249,27,8.8,Neutral,8.5,Snug,Mid-Range
+Valco VMK20,Valco,149,30,8.6,Balanced,8.0,Spacious,Mid-Range
+Urbanista Miami,Urbanista,129,28,7.7,Bass-Heavy,8.0,Snug,Mid-Range
+Urbanista Los Angeles,Urbanista,169,28,7.8,Bass-Heavy,8.0,Snug,Mid-Range
+Marshall Monitor II ANC,Marshall,249,30,8.4,Balanced,8.5,Snug,Mid-Range
+Marshall Mid ANC,Marshall,199,26,8.0,Bass-Heavy,8.0,Tight,Mid-Range
+House of Marley Exodus ANC,House of Marley,199,27,7.9,Bass-Heavy,8.5,Spacious,Mid-Range
+House of Marley Positive Vibration XL,House of Marley,129,25,7.6,Bass-Heavy,8.0,Snug,Budget
+Edifier W820NB Plus,Edifier,69,29,7.5,Balanced,7.0,Spacious,Budget
+Baseus Bowie H1,Baseus,59,28,7.2,Bass-Heavy,7.0,Snug,Budget
+QCY H3,QCY,49,27,7.0,Bass-Heavy,6.5,Snug,Budget
+Haylou S35 ANC,Haylou,49,28,7.1,Bass-Heavy,6.5,Spacious,Budget
+Ugreen HiTune Max5,Ugreen,59,29,7.3,Balanced,7.0,Snug,Budget
+Picun F6,Picun,39,25,6.8,Bass-Heavy,6.0,Snug,Budget
+Srhythm NC25,Srhythm,45,24,6.9,Bass-Heavy,6.5,Snug,Budget
+Srhythm NC35,Srhythm,55,25,7.0,Bass-Heavy,6.5,Snug,Budget
+Avantree Aria Pro,Avantree,79,26,7.2,Balanced,7.0,Spacious,Budget
+Wyze Noise-Cancelling Headphones,Wyze,79,28,7.5,Balanced,7.5,Spacious,Budget
+Monoprice BT-600ANC,Monoprice,89,32,7.4,Bass-Heavy,7.0,Snug,Budget
+Taotronics SoundSurge 85,Taotronics,49,26,6.9,Bass-Heavy,6.5,Spacious,Budget
+Mpow H10,Mpow,45,25,6.8,Bass-Heavy,6.0,Snug,Budget
+Cowin E7 Pro,Cowin,59,23,6.5,Bass-Heavy,6.5,Spacious,Budget
+Status Audio Core ANC,Status Audio,99,29,8.1,Balanced,7.5,Snug,Budget
+EarFun Wave Pro 2,EarFun,89,32,8.2,Balanced,7.5,Snug,Budget
+Cleer Alpha,Cleer,199,31,8.3,Bass-Heavy,8.0,Spacious,Mid-Range
+Status Audio Flagship ANC,Status Audio,199,33,8.6,Balanced,8.5,Spacious,Mid-Range
