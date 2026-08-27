@@ -25,16 +25,16 @@ BASS_SCORE_MAP = {
 def load_and_clean_data() -> pd.DataFrame:
     raw_df = pd.read_csv(DATA_PATH)
 
-    # Ensure numeric casts
+    # Clean numeric casts
     raw_df["Price_GBP"] = pd.to_numeric(raw_df["Price_GBP"], errors="coerce")
     raw_df["ANC_dB"] = pd.to_numeric(raw_df["ANC_dB"], errors="coerce")
     raw_df["Sound_Quality"] = pd.to_numeric(raw_df["Sound_Quality"], errors="coerce")
     raw_df["Durability"] = pd.to_numeric(raw_df["Durability"], errors="coerce")
 
-    # Clean text columns
+    # Clean text columns and map Bass to numerical score
     raw_df["Bass_Profile"] = raw_df["Bass_Intensity"].astype(str).str.strip()
     raw_df["Bass_Score"] = (
-        raw_df["Bass_Profile"].map(BASS_SCORE_MAP).fillna(7.0)
+        raw_df["Bass_Profile"].map(BASS_SCORE_MAP).fillna(7.5)
     )
 
     return raw_df.dropna(subset=["Price_GBP", "ANC_dB", "Sound_Quality"])
@@ -42,47 +42,13 @@ def load_and_clean_data() -> pd.DataFrame:
 
 df = load_and_clean_data()
 
-METRICS = {
-    "ANC Attenuation (dB)": {
-        "col": "ANC_dB",
-        "unit": " dB",
-        "type": "numeric",
-    },
-    "Sound Quality (1-10)": {
-        "col": "Sound_Quality",
-        "unit": "/10",
-        "type": "numeric",
-    },
-    "Bass Score (Derived 1-10)": {
-        "col": "Bass_Score",
-        "unit": "/10",
-        "type": "numeric",
-    },
-    "Durability (1-10)": {
-        "col": "Durability",
-        "unit": "/10",
-        "type": "numeric",
-    },
-    "Price (£ GBP)": {
-        "col": "Price_GBP",
-        "unit": " £",
-        "type": "numeric",
-    },
-    "Bass Profile (Category)": {
-        "col": "Bass_Profile",
-        "unit": "",
-        "type": "categorical",
-    },
-    "Earcup Fit (Category)": {
-        "col": "Earcup_Fit",
-        "unit": "",
-        "type": "categorical",
-    },
-    "Performance Tier (Category)": {
-        "col": "Tier",
-        "unit": "",
-        "type": "categorical",
-    },
+# Numerical metrics available for Y-Axis plotting & averaging
+NUMERICAL_METRICS = {
+    "ANC Attenuation (dB)": "ANC_dB",
+    "Sound Quality (1-10)": "Sound_Quality",
+    "Bass Score (Numeric 1-10)": "Bass_Score",
+    "Durability (1-10)": "Durability",
+    "Price (£ GBP)": "Price_GBP",
 }
 
 # ----------------- SIDEBAR -----------------
@@ -91,7 +57,7 @@ st.sidebar.title("🎛️ Dashboard Controls")
 view_mode = st.sidebar.radio(
     "Select Visualization Mode",
     options=[
-        "1. Dynamic 2D Explorer",
+        "1. Dynamic 2D Explorer (Multi-Y Average)",
         "2. Multi-Metric 2x2 Grid",
         "3. Categorical Distributions",
         "4. Head-to-Head Comparison",
@@ -140,67 +106,80 @@ col_kpi1.metric("Filtered Models", len(fdf))
 col_kpi2.metric("Avg Price", f"£{fdf['Price_GBP'].mean():.1f}")
 col_kpi3.metric("Peak ANC", f"{fdf['ANC_dB'].max()} dB")
 col_kpi4.metric("Top Sound Score", f"{fdf['Sound_Quality'].max()}/10")
-col_kpi5.metric("Top Durability", f"{fdf['Durability'].max()}/10")
+col_kpi5.metric("Top Bass Score", f"{fdf['Bass_Score'].max()}/10")
 
 st.markdown("---")
 
-# ----------------- VIEW 1: DYNAMIC 2D EXPLORER -----------------
-if view_mode == "1. Dynamic 2D Explorer":
-    st.subheader("📈 Dynamic 2D Matrix Explorer")
+# ----------------- VIEW 1: DYNAMIC 2D EXPLORER (MULTI-Y AVERAGE) -----------------
+if view_mode == "1. Dynamic 2D Explorer (Multi-Y Average)":
+    st.subheader("📈 Dynamic 2D Matrix Explorer (Multi-Y Averaging)")
+    st.markdown(
+        "Select **multiple Y-axis metrics** below. The app will calculate the **arithmetic average** across your chosen metrics for every headphone and plot the composite score on the Y-axis."
+    )
 
-    c1, c2, c3, c4 = st.columns(4)
+    c1, c2, c3 = st.columns([2, 1, 1])
     with c1:
-        x_label = st.selectbox("X-Axis", list(METRICS.keys()), index=4)  # Price
+        selected_y_labels = st.multiselect(
+            "Select Y-Axis Metric(s) to Average:",
+            options=list(NUMERICAL_METRICS.keys()),
+            default=["ANC Attenuation (dB)"],
+        )
     with c2:
-        y_label = st.selectbox("Y-Axis", list(METRICS.keys()), index=0)  # ANC
-    with c3:
         color_label = st.selectbox(
             "Color Grouping", ["Tier", "Bass_Profile", "Earcup_Fit", "Brand"], index=0
         )
-    with c4:
-        size_option = st.selectbox(
-            "Bubble Size", ["Uniform", "ANC_dB", "Sound_Quality", "Durability"], index=0
+    with c3:
+        x_axis_label = st.selectbox(
+            "X-Axis Metric", options=list(NUMERICAL_METRICS.keys()), index=4
         )
 
-    x_col = METRICS[x_label]["col"]
-    y_col = METRICS[y_label]["col"]
+    if not selected_y_labels:
+        st.warning("Please select at least one Y-axis metric.")
+    else:
+        # Calculate average if multiple Y metrics are chosen
+        y_cols = [NUMERICAL_METRICS[label] for label in selected_y_labels]
+        if len(y_cols) == 1:
+            fdf["Composite_Y"] = fdf[y_cols[0]]
+            y_axis_title = selected_y_labels[0]
+        else:
+            fdf["Composite_Y"] = fdf[y_cols].mean(axis=1)
+            y_axis_title = f"Average of ({', '.})" if False else f"Averaged Metric ({len(y_cols)} selected)"
 
-    fig = px.scatter(
-        fdf,
-        x=x_col,
-        y=y_col,
-        color=color_label,
-        size=None if size_option == "Uniform" else size_option,
-        hover_name="Model",
-        text="Model",
-        hover_data={
-            "Price_GBP": ":.2f",
-            "ANC_dB": True,
-            "Sound_Quality": True,
-            "Bass_Profile": True,
-            "Durability": True,
-            "Earcup_Fit": True,
-            "Tier": True,
-            x_col: False,
-            y_col: False,
-        },
-        template="plotly_dark",
-        height=680,
-    )
+        x_col = NUMERICAL_METRICS[x_axis_label]
 
-    fig.update_traces(
-        textposition="top center",
-        textfont=dict(size=9, color="#CBD5E1"),
-        marker=dict(line=dict(width=1, color="#FFFFFF")),
-    )
+        fig = px.scatter(
+            fdf,
+            x=x_col,
+            y="Composite_Y",
+            color=color_label,
+            hover_name="Model",
+            text="Model",
+            hover_data={
+                "Price_GBP": ":.2f",
+                "ANC_dB": True,
+                "Sound_Quality": True,
+                "Bass_Score": True,
+                "Durability": True,
+                "Composite_Y": ":.2f",
+                x_col: False,
+            },
+            template="plotly_dark",
+            height=650,
+        )
 
-    fig.update_layout(
-        xaxis_title=x_label,
-        yaxis_title=y_label,
-        legend_title=color_label,
-        margin=dict(l=40, r=40, t=40, b=40),
-    )
-    st.plotly_chart(fig, use_container_width=True)
+        fig.update_traces(
+            textposition="top center",
+            textfont=dict(size=9, color="#CBD5E1"),
+            marker=dict(size=11, line=dict(width=1, color="#FFFFFF")),
+        )
+
+        fig.update_layout(
+            xaxis_title=x_axis_label,
+            yaxis_title=y_axis_title,
+            legend_title=color_label,
+            margin=dict(l=40, r=40, t=40, b=40),
+        )
+        st.plotly_chart(fig, use_container_width=True)
 
 # ----------------- VIEW 2: MULTI-METRIC 2x2 GRID -----------------
 elif view_mode == "2. Multi-Metric 2x2 Grid":
@@ -216,9 +195,9 @@ elif view_mode == "2. Multi-Metric 2x2 Grid":
             hover_name="Model",
             title="ANC Attenuation (dB) vs. Price (£)",
             template="plotly_dark",
-            height=420,
+            height=400,
         )
-        fig_anc.update_traces(marker=dict(size=9))
+        fig_anc.update_traces(marker=dict(size=8))
         st.plotly_chart(fig_anc, use_container_width=True)
 
         fig_bass = px.scatter(
@@ -227,11 +206,11 @@ elif view_mode == "2. Multi-Metric 2x2 Grid":
             y="Bass_Score",
             color="Bass_Profile",
             hover_name="Model",
-            title="Bass Score vs. Price (£)",
+            title="Bass Score (Numeric) vs. Price (£)",
             template="plotly_dark",
-            height=420,
+            height=400,
         )
-        fig_bass.update_traces(marker=dict(size=9))
+        fig_bass.update_traces(marker=dict(size=8))
         st.plotly_chart(fig_bass, use_container_width=True)
 
     with g2:
@@ -243,9 +222,9 @@ elif view_mode == "2. Multi-Metric 2x2 Grid":
             hover_name="Model",
             title="Sound Quality (1-10) vs. Price (£)",
             template="plotly_dark",
-            height=420,
+            height=400,
         )
-        fig_sq.update_traces(marker=dict(size=9))
+        fig_sq.update_traces(marker=dict(size=8))
         st.plotly_chart(fig_sq, use_container_width=True)
 
         fig_dur = px.scatter(
@@ -256,9 +235,9 @@ elif view_mode == "2. Multi-Metric 2x2 Grid":
             hover_name="Model",
             title="Durability (1-10) vs. Price (£)",
             template="plotly_dark",
-            height=420,
+            height=400,
         )
-        fig_dur.update_traces(marker=dict(size=9))
+        fig_dur.update_traces(marker=dict(size=8))
         st.plotly_chart(fig_dur, use_container_width=True)
 
 # ----------------- VIEW 3: CATEGORICAL DISTRIBUTIONS -----------------
@@ -272,7 +251,7 @@ elif view_mode == "3. Categorical Distributions":
         )
         num_target = st.selectbox(
             "Metric to Inspect",
-            ["ANC_dB", "Sound_Quality", "Price_GBP", "Durability"],
+            ["ANC_dB", "Sound_Quality", "Bass_Score", "Price_GBP", "Durability"],
         )
 
         fig_box = px.box(
@@ -284,7 +263,7 @@ elif view_mode == "3. Categorical Distributions":
             hover_name="Model",
             template="plotly_dark",
             title=f"{num_target} Distribution grouped by {cat_group}",
-            height=520,
+            height=500,
         )
         st.plotly_chart(fig_box, use_container_width=True)
 
@@ -296,7 +275,7 @@ elif view_mode == "3. Categorical Distributions":
             barmode="group",
             template="plotly_dark",
             title=f"Headphone Count by {cat_group} & Tier",
-            height=520,
+            height=500,
         )
         st.plotly_chart(fig_bar, use_container_width=True)
 
@@ -318,11 +297,10 @@ elif view_mode == "4. Head-to-Head Comparison":
         r1, r2 = st.columns([1, 1])
 
         with r1:
-            # Normalized Radar Plot
             radar_categories = [
                 "ANC (Norm)",
                 "Sound Quality",
-                "Bass Intensity",
+                "Bass Score",
                 "Durability",
                 "Value (Score/£)",
             ]
@@ -339,7 +317,6 @@ elif view_mode == "4. Head-to-Head Comparison":
                     row["Durability"],
                     val_norm,
                 ]
-                # Close the polygon
                 scores.append(scores[0])
 
                 fig_radar.add_trace(
@@ -357,7 +334,7 @@ elif view_mode == "4. Head-to-Head Comparison":
                 ),
                 template="plotly_dark",
                 title="Performance Radar (Normalized 0-10 Scale)",
-                height=500,
+                height=480,
             )
             st.plotly_chart(fig_radar, use_container_width=True)
 
@@ -370,6 +347,7 @@ elif view_mode == "4. Head-to-Head Comparison":
                     "Price_GBP",
                     "ANC_dB",
                     "Sound_Quality",
+                    "Bass_Score",
                     "Bass_Profile",
                     "Durability",
                     "Earcup_Fit",
