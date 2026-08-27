@@ -136,14 +136,13 @@ if view_mode == "1. Dynamic 2D Explorer (Multi-Y Average)":
     if not selected_y_labels:
         st.warning("Please select at least one Y-axis metric.")
     else:
-        # Calculate average if multiple Y metrics are chosen
         y_cols = [NUMERICAL_METRICS[label] for label in selected_y_labels]
         if len(y_cols) == 1:
             fdf["Composite_Y"] = fdf[y_cols[0]]
             y_axis_title = selected_y_labels[0]
         else:
             fdf["Composite_Y"] = fdf[y_cols].mean(axis=1)
-            y_axis_title = f"Average of ({', '.})" if False else f"Averaged Metric ({len(y_cols)} selected)"
+            y_axis_title = f"Averaged Metric ({len(y_cols)} selected)"
 
         x_col = NUMERICAL_METRICS[x_axis_label]
 
